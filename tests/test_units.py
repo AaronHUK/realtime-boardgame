@@ -14,7 +14,7 @@ class TestUnits(unittest.TestCase):
         self.assertEqual(uapi.Constructor.cost_str(), "1B, 1C, 1Si, 1U")
         self.assertEqual(uapi.Zergling.cost_str(), "1B, 3C")
         self.assertEqual(uapi.Hydralisk.cost_str(), "2B, 5C, Sac:Zergling")
-        self.assertEqual(uapi.Nuke.cost_str(), "4Si, Sac:5xEnrichedUranium")
+        self.assertEqual(uapi.Nuke.cost_str(), "4Si, Sac:3xEnrichedUranium")
 
     def test_stem_cell(self):
         self.board.add_unit(uapi.StemCell, self.aaron)
