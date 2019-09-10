@@ -5,6 +5,7 @@ import model.units.api as uapi
 from model.units.unit import Unit
 from model.units.factories import res_growth
 from util.utils import min_max
+from collections import OrderedDict
 
 
 def ask_players():
@@ -67,13 +68,15 @@ def _display_atkdef(board):
 def _display_units(board):
     unit_strs = []
     for index, (player, units) in enumerate(board.units.items()):
-        _strs = []
+        p_us = OrderedDict()
         for unit in sorted(units, key=lambda x: x.sort):
             u_str = type(unit).__name__
             if unit.just_built:
                 u_str = "+{}+".format(u_str)
-            _strs.append(u_str)
-        unit_strs.append(_strs)
+            if u_str not in p_us:
+                p_us[u_str] = 0
+            p_us[u_str] += 1
+        unit_strs.append([unit if count == 1 else "{}x{}".format(count, unit) for unit, count in p_us.items()])
     print(_columnise(unit_strs))
 
 
