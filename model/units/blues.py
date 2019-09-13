@@ -1,12 +1,11 @@
 from model.units.unit import Unit
-from model.units.api import Constructor
+from model.units.redblue import Constructor
 from model.resources import ResType
-from model.exceptions import RequestException
 
 
 class Deflector(Unit):
     """+0/+3"""
-    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 3)]
+    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 2)]
     defence = 3
     sort = 110
 
@@ -46,6 +45,7 @@ class TimedExplosive(Unit):
     """+2/+0 next turn ONLY"""
     cost = [(ResType.SILICON, 1)]
     sort = 125
+    core = False
 
     def start_of_turn(self):
         if self.attack > 0:

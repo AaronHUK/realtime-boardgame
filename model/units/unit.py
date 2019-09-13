@@ -7,19 +7,23 @@ class Unit:
     attack = 0
     defence = 0
     sort = 0
+    core = True
+    prompt = False
 
-    def __init__(self, player, death_callback, prompt=False, **kwargs):
+    def __init__(self, player, death_callback, **kwargs):
         self.attack = self.attack
         self.defence = self.defence
         self.player = player
         self.death_callback = death_callback
-        self.just_built = not prompt
+        self.just_built = not self.prompt
+        self.tapped = not self.prompt
 
     def start_of_turn(self):
         self.just_built = False
+        self.tapped = False
 
     def activate(self, target=None):
-        pass
+        self.tapped = True
 
     def on_death(self):
         self.death_callback(self, self.player)

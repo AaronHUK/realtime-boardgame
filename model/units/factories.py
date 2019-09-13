@@ -2,6 +2,7 @@ from model.units import unit
 from model import magics
 from model.resources import ResType
 from util.utils import min_max
+from model.exceptions import ModelException
 
 
 FACTS = {ResType.CARBON: {},
@@ -13,17 +14,6 @@ def res_growth(res):
     if res == ResType.BUILDS:
         return 1
     return magics.GROWTH[res][min_max(len(FACTS[res]) - 1, max_val=len(magics.GROWTH[res]) - 1)]
-
-
-class Constructor(unit.Unit):
-    """+0/+1, generates +1 build"""
-    defence = 1
-    sort = 10
-    cost = [(ResType.BUILDS, 1), (ResType.CARBON, 1), (ResType.SILICON, 1), (ResType.URANIUM, 1)]
-
-    def start_of_turn(self):
-        self.player.add_resource(ResType.BUILDS, 1)
-        super(Constructor, self).start_of_turn()
 
 
 class _BasicFact(unit.Unit):
@@ -63,3 +53,18 @@ class Centrifuge(_BasicFact):
     """+0/+0, generates Uranium"""
     res = ResType.URANIUM
     sort = 60
+
+
+# OPTIONAL BELOW THIS POINT #
+class Market(unit.Unit):
+    sort = 65
+    cost = [(ResType.BUILDS, 1)]
+    core = False
+    GENERATE = {ResType.CARBON: 3, ResType.SILICON: 2, ResType.URANIUM: 2}
+
+    def activate(self, target=None):
+        if not isinstance(target, ResType):
+            raise ModelException("Market needs to be given a resource to generate (received a {})".format(
+                                 type(target).__name__))
+        self.player.add_resource(target, self.GENERATE[target])
+        super(Market, self).activate()
