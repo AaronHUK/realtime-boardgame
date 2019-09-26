@@ -1,0 +1,157 @@
+Goal
+
+This is a strategy game of building structures and units. Your aim is to have enough attackers to overwhelm your opponents' defences, while maintaining enough defence to repel your opponents' attackers.
+
+The winner is the last surviving player.
+
+Preparation
+
+Place a player mat in front of each player. Set the resource sliders to 2 Builds, and 0 for everything else. Add 2 “Constructor” cards to each player's start of turn area (stack them so that the top and left edges are visible). Set everyone's attack and defence to 0 / 2.
+
+Lay out the core cards in the centre of the play area as shown below:
+
+[optional] Randomly choose 2-3 advanced cards, and add them to the core cards on their appropriate colours.
+
+Playing the game
+
+The game is played simultaneously by all players; there is no order or priority (and the order of play never affects the board state). There are 4 phases in each round: Start of turn, Declaring attack, Actions, Resolving attack.
+
+For the phases involving player choice, players can collectively choose when the phase finishes. While learning, it is best to do this via unanimous consent; however once players are familiar with the game, this should be done by calling time.
+
+Calling Time
+
+As soon as one player is done, they can call time on the rest of the players, by counting down: “5, 4, 3, 2, 1, end.”
+* If no player takes an action before “end” is spoken, the round ends
+* As soon as a player takes an action, calling time is interrupted and play resumes
+* The player calling time cannot be the one to take an action (they are declaring themselves happy to end the turn with the current board state)
+* * However, if another player takes an action, interrupting the count, then the counting player may take actions as normal (as the board state has changed).
+
+
+Start of turn
+
+Work out how much each factory produces, by counting the number of players that own them. All players increase their resource sliders by the amounts their factories generate.
+
+All cards bought or activated last turn should be turned over to the active side.
+
+Any cards with a start of turn effect perform that effect now.
+
+All players should update their attack and defence totals on their player mats.
+
+Declaring attack
+
+To attack, players must declare their intention to attack in this phase. In declaring attack, you may take no further actions this round. Your attack will happen in the Resolving Attack phase in this round.
+
+Actions
+
+All players may perform as few or as many of the following actions as they wish to and are able:
+
+1. Buy a unit
+Use your resources to buy a unit. Add that unit card to your player mat, and take it's resource cost (listed on the card) out of your resources.
+
+Unit stacks cannot be exhausted, and can be replaced by tokens if the number of physical cards runs out.
+
+2. Activate a unit
+Some units have abilities that can be activated. You may activate these (following the text on the card) at any point during your turn.
+
+'Tap' the unit by flipping the card over to indicate it has been activated. It will 'Un-tap' at the start of the next round.
+
+Resolving attacks
+
+* Anyone who declared attack must choose who they are attacking.
+* * If multiple players are attacking, they can choose targets in any order
+* * If no-one wants to choose first, the player with the highest attack value must choose first
+* * this can be enforced by calling time on the player
+* * the default is to attack the player on their immediate left
+* Two players may both choose to attack the same player
+* * If the attacker's attack is not greater than the defender's defence, nothing happens
+* * If the attacker's attack is greater than the defender's defence, that player is defeated!
+* * * If that player is also attacking, stop and resolve his attack before removing the player (all attacks happen simultaneously)
+* * * Put the player's units back onto the unit stacks
+* * * The attacker gains the resources of the defender
+* * * In the case of multiple attackers, the resources are split evenly (with any fractional resources rounded up)
+* * * Remove the defender's player mat. They are out of the game.
+
+Winning the game
+
+The winner is the last surviving player.
+
+If the remaining players die simultaneously, the game is drawn between them. There is no tie-breaker (not attack total, defence total, resources etc.)
+
+Units
+
+Factories
+
+The three basic resource factories (Tar Pit, Mine, Centrifuge) generate less resources as more players build them. e.g. if Aaron has 2 Tar Pits and Ezra has none, each Tar Pit generates 4 Carbon, giving Aaron 8 Carbon per turn. If Ezra then buys a Tar Pit, each Tar Pit now generates 3 Carbon, giving Aaron 6 Carbon and Ezra 3 Carbon per turn.
+
+Tar Pit (Cost: 2 Builds)
+Generates Carbon. Per player growth rates:
+1 player: 4 Carbon
+2 players: 3 Carbon
+3+ players: 2 Carbon
+
+Mine (Cost: 2 Builds)
+Generates Silicon. Per player growth rates:
+1 player: 3 Silicon
+2 players: 2 Silicon
+3+ players: 1 Silicon
+
+Centrifuge (Cost: 2 Builds)
+Generates Uranium. Per player growth rates:
+1 player: 2 Uranium
+2+ players: 1 Uranium
+
+Constructor
+Generates 1 Build.
+
+Carbon-based units
+
+Stem Cell (Cost: 1 Build, 1 Carbon)
+Produces builds from Carbon. Can be activated to spend 1 Carbon to generate 1 Build. Recharges at the start of your turn.
+
+Zergling (Cost: 1 Build, 2 Carbon)
+3 Atk
+Basic attacker. Can be upgraded into either a defensive unit (Queen) or stronger attackers (Hydralisk, Ultralisk).
+
+Queen (Cost: 2 Builds, 3 Carbon, 1 Zergling)
+3 Atk, 6 Def
+Defends immediately.
+
+Hydralisk (Cost: 2 Builds, 3 Carbon, 1 Zergling)
+9 Atk
+Can be upgraded into Ultralisk.
+
+Ultralisk (Cost: 3 Builds, 7 Carbon, 1 Hydralisk)
+25 Atk
+
+Silicon based units
+
+Universal Constructor (Cost: 2 Builds, 2 Silicon, 1 Constructor)
+Generates 2 builds.
+
+Fortified Constructor (Cost: 3 Silicon, 1 Constructor)
+8 Def
+Generates 1 build.
+
+Deflector (Cost: 1 Build, 2 Silicon)
+3 Def
+Defends immediately.
+
+Plasma Shields (Cost: 1 Build, 4 Silicon)
+7 Def 
+Only ready for defence next turn.
+
+Von Neumann Bot (Cost: 2 Builds, 7 Silicon, 1 Constructor)
+1 Atk
+Start of turn: Add a token to this unit. This unit's attack is doubled for each token on it.
+
+Uranium based units
+
+Fusion Cannon (Cost: 1 Build, 2 Uranium)
+2 Atk, 3 Def 
+
+Enriched Uranium (Cost: 1 Build, 2 Uranium)
+Used to build a nuke.
+
+Nuke (Cost: 1 Build, 2 Silicon, 3 Enriched Uranium)
+Sacrifice this when you attack a player to kill them.
+

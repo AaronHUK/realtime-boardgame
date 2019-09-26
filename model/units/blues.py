@@ -8,18 +8,19 @@ class Deflector(Unit):
     cost = [(ResType.BUILDS, 1), (ResType.SILICON, 2)]
     defence = 3
     sort = 110
+    prompt = True
 
 
 class PlasmaShields(Unit):
     """+0/+6"""
-    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 6)]
-    defence = 6
+    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 4)]
+    defence = 7
     sort = 120
 
 
 class UniversalConstructor(Unit):
     """upgrades Constructor: +0/-1, generates +1 build"""
-    cost = [(ResType.BUILDS, 2), (ResType.SILICON, 4)]
+    cost = [(ResType.BUILDS, 2), (ResType.SILICON, 2)]
     sacrifices = [(Constructor, 1)]
     defence = 0
     sort = 20
@@ -31,7 +32,7 @@ class UniversalConstructor(Unit):
 
 class FortifiedConstructor(Unit):
     '''upgrades Constructor: +0/+7'''
-    cost = [(ResType.SILICON, 6)]
+    cost = [(ResType.SILICON, 3)]
     sacrifices = [(Constructor, 1)]
     defence = 8
     sort = 30
@@ -56,7 +57,8 @@ class TimedExplosive(Unit):
 
 class VonNeumannBot(Unit):
     '''+1/+0, attack doubles every turn'''
-    cost = [(ResType.BUILDS, 3), (ResType.SILICON, 11)]
+    cost = [(ResType.BUILDS, 2), (ResType.SILICON, 7)]
+    sacrifices = [(Constructor, 1)]
     attack = 1
     sort = 130
 

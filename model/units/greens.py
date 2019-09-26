@@ -4,13 +4,14 @@ from model.resources import ResType
 
 class EnrichedUranium(Unit):
     """No effect"""
-    cost = [(ResType.BUILDS, 1), (ResType.URANIUM, 4)]
+    cost = [(ResType.BUILDS, 1), (ResType.URANIUM, 2)]
     sort = 64
+    prompt = True
 
 
 class Nuke(Unit):
     """Activate: immense damage to a player"""
-    cost = [(ResType.SILICON, 4)]
+    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 2)]
     sacrifices = [(EnrichedUranium, 3)]
     sort = 160
 
@@ -23,16 +24,16 @@ class Nuke(Unit):
 
 class FusionCannon(Unit):
     """+3/+2"""
-    cost = [(ResType.BUILDS, 1), (ResType.URANIUM, 4)]
-    attack = 3
-    defence = 2
+    cost = [(ResType.BUILDS, 1), (ResType.URANIUM, 2)]
+    attack = 2
+    defence = 3
     sort = 140
 
 
 class Irradiate(Unit):
-    """+0/+2 this turn ONLY"""
+    """+0/+4 this turn ONLY"""
     cost = [(ResType.URANIUM, 1)]
-    defence = 2
+    defence = 4
     sort = 150
 
     def start_of_turn(self):
