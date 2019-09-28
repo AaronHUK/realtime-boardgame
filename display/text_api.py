@@ -5,7 +5,9 @@ import model.units.api as uapi
 from model.units.unit import Unit
 from model.units.factories import res_growth
 from util.utils import min_max
+
 from collections import OrderedDict
+import time
 
 
 def ask_players():
@@ -24,6 +26,7 @@ def ask_players():
 def announce_round(round_no, board):
     _flush_stdout()
     print("Round {}!".format(round_no))
+    time.sleep(2)
 
 
 def _flush_stdout():
@@ -115,6 +118,9 @@ def _transpose(lists):
 def announce_turn(player, board):
     _flush_stdout()
     print("{}'s turn!".format(player.name))
+
+
+def _display_board_state(player, board):
     _display_players(player, board)
     _display_resources(board)
     _display_atkdef(board)
@@ -123,7 +129,8 @@ def announce_turn(player, board):
 
 def get_player_action(player, purchaser):
     while True:
-        actions = "1. Build unit\n2. Activate unit\n3. Declare attack\n4. End turn\nEnter input: "
+        _display_board_state(player, purchaser.board)
+        actions = "1. Build unit\n2. Activate unit\n3. Declare attack\n4. Call time\nEnter input: "
         action = int(input(actions))
         if action == 1:
             unit = get_unit_name(player, purchaser)
@@ -138,7 +145,7 @@ def get_player_action(player, purchaser):
         if action == 3:
             return "declare_attack", None
         if action == 4:
-            return "end_turn",
+            return "call_time",
         else:
             print("Unrecognised input!")
 

@@ -23,25 +23,27 @@ class Controller:
         print("{} defeated {}!".format(winner, ', '.join(losers)))
 
     def play_round(self):
-        end_turn = set((player for player in self.board.units if player.attacking))
-        now_attacking = end_turn.copy()
+        round_players = set((player for player in self.board.units if not player.attacking))
+        call_time = set()
+        now_attacking = set((player for player in self.board.units if player.attacking))
         attacks = {}
-        while len(end_turn) != len(self.players):
-            for player in self.board.units:
-                if player in end_turn:
+        while len(round_players) != len(call_time):
+            for player in round_players:
+                if player in call_time:
                     continue
                 display.announce_turn(player, self.board)
                 action = display.get_player_action(player, self.purchaser)
-                if action[0] == 'end_turn':
-                    end_turn.add(player)
-                elif action[0] == 'choose_attacker':
-                    attacks[player] = action[1]
+                if action[0] == 'call_time':
+                    call_time.add(player)
                 elif action[0] == 'declare_attack':
                     player.attacking = True
-                    end_turn.add(player)
+                    round_players.remove(player)
+                    call_time = set()
                 else:
                     if getattr(self, action[0])(player, action[1]):
-                        end_turn.add(player)
+                        call_time.add(player)
+                    else:
+                        call_time = set()
         # Attacking time!
         for player in now_attacking:
             attacks[player] = display.choose_target(player, self.board)
