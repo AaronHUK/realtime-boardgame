@@ -30,17 +30,13 @@ class BoardState(object):
         return new_unit  # for debugging / testing
 
     def next_round(self, attacks):
-        for attacker in self.pending_attack:
+        self.pending_defeat = set()
+        for attacker, defender in attacks.iteritems:
             self.attack_player(attacker, attacks[attacker])
-            attacker.attacking = False
-        self.pending_attack = set()
         for defeated in self.pending_defeat:
             self.defeat_player(defeated)
-        self.pending_defeat = set()
-        for player_ in self.players:
-            if player_.attacking:
-                self.pending_attack.add(player_)
-            for unit in self.units[player_]:
+        for units in self.units.values():
+            for unit in units:
                 unit.start_of_turn()
 
     def clear_all(self):
@@ -65,8 +61,6 @@ class BoardState(object):
         return sum((unit.defence for unit in self.units[player_]))
 
     def attack_player(self, attacker, defender):
-        if attacker not in self.pending_attack:
-            raise ModelException("Players can only attack if they declared last turn that they were attacking")
         if self.total_attack(attacker) > self.total_defence(defender):
             self.transfer_resources(defender, attacker)
             self.pending_defeat.add(defender)

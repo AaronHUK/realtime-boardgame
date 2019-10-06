@@ -23,10 +23,28 @@ def ask_players():
     return names
 
 
-def announce_round(round_no, board):
+def announce_round(round_no):
     _flush_stdout()
     print("Round {}!".format(round_no))
-    time.sleep(2)
+    time.sleep(1)
+
+
+def announce_declare_attack():
+    _flush_stdout()
+    print("Declare attack phase!")
+    time.sleep(1)
+
+
+def announce_actions():
+    _flush_stdout()
+    print("Action phase!")
+    time.sleep(1)
+
+
+def announce_attack():
+    _flush_stdout()
+    print("Attack phase!")
+    time.sleep(1)
 
 
 def _flush_stdout():
@@ -127,11 +145,35 @@ def _display_board_state(player, board):
     _display_units(board)
 
 
+def forced_int_input(prompt):
+    ipt = ""
+    while not isinstance(ipt, int):
+        ipt = input(prompt)
+        try:
+            ipt = int(ipt)
+        except:
+            print("Expected a number, received '{}'".format(ipt))
+    return ipt
+
+
+def get_declare_attack(player, board):
+    while True:
+        _display_board_state(player, board)
+        actions = "1. Declare Attack\n2. Call time\nEnter input: "
+        action = forced_int_input(actions)
+        if action == 1:
+            return "declare_attack"
+        if action == 2:
+            return "call_time"
+        else:
+            print("Unrecognised input!")
+
+
 def get_player_action(player, purchaser):
     while True:
         _display_board_state(player, purchaser.board)
-        actions = "1. Build unit\n2. Activate unit\n3. Declare attack\n4. Call time\nEnter input: "
-        action = int(input(actions))
+        actions = "1. Build unit\n2. Activate unit\n3. Call time\nEnter input: "
+        action = forced_int_input(actions)
         if action == 1:
             unit = get_unit_name(player, purchaser)
             if unit is None:
@@ -143,8 +185,6 @@ def get_player_action(player, purchaser):
                 continue
             return "activate_unit", unit
         if action == 3:
-            return "declare_attack", None
-        if action == 4:
             return "call_time",
         else:
             print("Unrecognised input!")
@@ -163,7 +203,7 @@ def get_unit_name(player, purchaser):
             u_s = "[" + u_s + " *can't afford*]"
         prompt += u_s + "\n"
     units.insert(0, None)
-    return units[min_max(int(input(prompt + "Which unit: ")), len(units) - 1)]
+    return units[min_max(forced_int_input(prompt + "Which unit: "), len(units) - 1)]
 
 
 def get_player_unit(player, board):
@@ -174,7 +214,7 @@ def get_player_unit(player, board):
     for index, unit in enumerate(units):
         prompt += "{}: {} ({})\n".format(index + 1, unit.__name__, unit.activate.__doc__)
     units.insert(0, None)
-    return units[min_max(int(input(prompt + "Which unit: ")), len(units) - 1)]
+    return units[min_max(forced_int_input(prompt + "Which unit: "), len(units) - 1)]
 
 
 def choose_target(player, board):
@@ -188,7 +228,7 @@ def choose_target(player, board):
     for index, defender in enumerate(defenders):
         d_str += "{}. {}\n".format(index, defender.name)
     d_str += "Choose target: "
-    return defenders[min_max(int(input(d_str)), len(defenders) - 1)]
+    return defenders[min_max(forced_int_input(d_str), len(defenders) - 1)]
 
 
 def reject(message):

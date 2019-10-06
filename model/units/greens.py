@@ -10,7 +10,7 @@ class EnrichedUranium(Unit):
 
 
 class Nuke(Unit):
-    """Activate: immense damage to a player"""
+    """Next turn: immense damage to a player when attacking"""
     cost = [(ResType.BUILDS, 1), (ResType.SILICON, 2)]
     sacrifices = [(EnrichedUranium, 3)]
     sort = 160
@@ -23,7 +23,7 @@ class Nuke(Unit):
 
 
 class FusionCannon(Unit):
-    """+3/+2"""
+    """2 Atk, 3 Def"""
     cost = [(ResType.BUILDS, 1), (ResType.URANIUM, 2)]
     attack = 2
     defence = 3
@@ -31,7 +31,7 @@ class FusionCannon(Unit):
 
 
 class Irradiate(Unit):
-    """+0/+4 this turn ONLY"""
+    """4 Def this turn ONLY"""
     cost = [(ResType.URANIUM, 1)]
     defence = 4
     sort = 150

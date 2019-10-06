@@ -4,7 +4,7 @@ from model.resources import ResType
 
 
 class Deflector(Unit):
-    """+0/+3"""
+    """3 Def"""
     cost = [(ResType.BUILDS, 1), (ResType.SILICON, 2)]
     defence = 3
     sort = 110
@@ -12,14 +12,14 @@ class Deflector(Unit):
 
 
 class PlasmaShields(Unit):
-    """+0/+6"""
+    """6 Def. Takes a turn to build!"""
     cost = [(ResType.BUILDS, 1), (ResType.SILICON, 4)]
     defence = 7
     sort = 120
 
 
 class UniversalConstructor(Unit):
-    """upgrades Constructor: +0/-1, generates +1 build"""
+    """upgrades Constructor: loses 1 Def, generates 1 extra build"""
     cost = [(ResType.BUILDS, 2), (ResType.SILICON, 2)]
     sacrifices = [(Constructor, 1)]
     defence = 0
@@ -31,7 +31,7 @@ class UniversalConstructor(Unit):
 
 
 class FortifiedConstructor(Unit):
-    '''upgrades Constructor: +0/+7'''
+    '''upgrades Constructor: +7 Def'''
     cost = [(ResType.SILICON, 3)]
     sacrifices = [(Constructor, 1)]
     defence = 8
@@ -40,6 +40,18 @@ class FortifiedConstructor(Unit):
     def start_of_turn(self):
         self.player.add_resource(ResType.BUILDS, 1)
         super(FortifiedConstructor, self).start_of_turn()
+
+
+class VonNeumannBot(Unit):
+    '''1 Atk, attack doubles every turn'''
+    cost = [(ResType.BUILDS, 2), (ResType.SILICON, 7)]
+    sacrifices = [(Constructor, 1)]
+    attack = 1
+    sort = 130
+
+    def start_of_turn(self):
+        self.attack *= 2
+        super(VonNeumannBot, self).start_of_turn()
 
 
 class TimedExplosive(Unit):
@@ -53,15 +65,3 @@ class TimedExplosive(Unit):
             self.on_death()
         if self.attack == 0:
             self.attack = 2
-
-
-class VonNeumannBot(Unit):
-    '''+1/+0, attack doubles every turn'''
-    cost = [(ResType.BUILDS, 2), (ResType.SILICON, 7)]
-    sacrifices = [(Constructor, 1)]
-    attack = 1
-    sort = 130
-
-    def start_of_turn(self):
-        self.attack *= 2
-        super(VonNeumannBot, self).start_of_turn()

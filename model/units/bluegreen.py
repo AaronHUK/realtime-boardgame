@@ -21,14 +21,14 @@ class EMP(Unit):
 
 
 class FissionReactor(Unit):
-    """Activate and spend 2U to gain 2Si and 2 builds"""
-    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 6)]
+    """Activate and spend 1U to gain 1Si and 2 builds"""
+    cost = [(ResType.BUILDS, 1), (ResType.SILICON, 3)]
     sacrifices = [(EnrichedUranium, 1)]
     core = False
     sort = 1030
 
     def activate(self, target=None):
-        self.player.remove_resource(ResType.URANIUM, 2)
-        self.player.add_resource(ResType.SILICON, 2)
+        self.player.remove_resource(ResType.URANIUM, 1)
+        self.player.add_resource(ResType.SILICON, 1)
         self.player.add_resource(ResType.BUILDS, 2)
         super(FissionReactor, self).activate(target)

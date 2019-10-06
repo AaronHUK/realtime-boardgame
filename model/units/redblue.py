@@ -3,8 +3,8 @@ from model.resources import ResType
 
 
 class Shapeshifter(Unit):
-    """+0/+10. Activate to switch to +10/+0 (and vice versa)."""
-    cost = [(ResType.BUILDS, 3), (ResType.CARBON, 5), (ResType.SILICON, 4)]
+    """10 Def. Activate to switch to 10 Atk (and vice versa)."""
+    cost = [(ResType.BUILDS, 3), (ResType.CARBON, 3), (ResType.SILICON, 2)]
     prompt = True
     defence = 10
     core = False
@@ -22,10 +22,10 @@ class Shapeshifter(Unit):
 
 
 class Constructor(Unit):
-    """+0/+1, generates +1 build"""
+    """1 Def, generates 1 build"""
     defence = 1
     sort = 1010
-    cost = [(ResType.BUILDS, 1), (ResType.CARBON, 4), (ResType.SILICON, 4)]
+    cost = [(ResType.BUILDS, 1), (ResType.CARBON, 2), (ResType.SILICON, 2)]
     prompt = True  # No effect; just to remove the unpleasant +s at the start of the game
     core = False
 
