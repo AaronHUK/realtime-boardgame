@@ -3,8 +3,8 @@ from model.player import Player
 from model.purchaser import Purchaser
 from model.exceptions import RequestException, ModelException
 import model.units.api as units_api
-import display.text_api as display
-
+#import display.text_api as display
+import display.sg_api as display
 
 class Controller:
     def __init__(self):
