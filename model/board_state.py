@@ -9,8 +9,11 @@ class BoardState(object):
         self.players = [player.Player(name) for name in player_names]
         self.units = {player_: [Constructor(player_, self._remove_unit), Constructor(player_, self._remove_unit)]
                       for player_ in self.players}
-        self.pending_attack = set()
         self.pending_defeat = set()
+
+    @property
+    def attacks_pending(self):
+        return any(ply.attacking for ply in self.players)
 
     def add_unit(self, type_, player_, **modifiers):
         if player_.attacking:
@@ -30,11 +33,17 @@ class BoardState(object):
         return new_unit  # for debugging / testing
 
     def next_round(self, attacks):
+        self.resolve(attacks)
+        self.start_turn()
+
+    def resolve(self, attacks):
         self.pending_defeat = set()
         for attacker, defender in attacks.iteritems:
             self.attack_player(attacker, attacks[attacker])
         for defeated in self.pending_defeat:
             self.defeat_player(defeated)
+
+    def start_turn(self):
         for units in self.units.values():
             for unit in units:
                 unit.start_of_turn()
